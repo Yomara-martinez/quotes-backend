@@ -21,7 +21,7 @@ const cors = require('cors')
 
 
 const dbConnection = require("./db")
-const Quote = require("./models/Quote")
+const Quote = require("./modules/Quote")
 
 dbConnection.authenticate()
   .then(() => console.log("DB connected"))
