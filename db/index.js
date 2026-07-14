@@ -16,5 +16,13 @@ const { Sequelize }= require("sequelize")
 // Never create a second Sequelize connection in another file.
 // ============================================================
 //const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quotes")
-const dbConnection = new Sequelize("process.env.DATABASE_URL")
+const dbConnection = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 module.exports= dbConnection

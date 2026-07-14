@@ -139,7 +139,6 @@ app.use((error, req, res, next) => {
 // ============================================================
 async function startApp() {
   // connect to your db here before the express server listens
- console.log("HELLOOO")
   await dbConnection.sync()
 
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
