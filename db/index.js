@@ -15,5 +15,6 @@ const { Sequelize }= require("sequelize")
 // Every other file that needs the database imports from here.
 // Never create a second Sequelize connection in another file.
 // ============================================================
-const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quotes")
+//const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quotes")
+const dbConnection = new Sequelize("process.env.DATABASE_URL")
 module.exports= dbConnection

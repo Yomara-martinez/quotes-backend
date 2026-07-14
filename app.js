@@ -35,7 +35,7 @@ dbConnection.authenticate()
 
 
 const app = express()
-const PORT = 8080
+const PORT = process.env.PORT
 
 app.use(express.json())  // lets the server read JSON from req.body
 app.use(morgan('dev'))   // logs every incoming request
