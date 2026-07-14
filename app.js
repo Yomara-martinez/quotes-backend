@@ -20,9 +20,12 @@ const cors = require('cors')
 // STEP 1 — Import your database connection and Quote model
 
 
+const dbConnection = require("./db")
+const Quote = require("./models/Quote")
 
-
-
+dbConnection.authenticate()
+  .then(() => console.log("DB connected"))
+  .catch(console.error);
 // Importing Quote here registers it with the connection so
 // db.sync() below knows to create the Quotes table.
 
@@ -51,7 +54,8 @@ app.use(cors())          // allows the React frontend to call this server
 // ------------------------------------------------------------
 app.get('/api/quotes', async (req, res, next) => {
   try {
-
+ const quotes = await Quote.findAll()
+ res.json(quotes)
   } catch (error) {
     next(error)
   }
@@ -70,7 +74,9 @@ app.get('/api/quotes', async (req, res, next) => {
 // ------------------------------------------------------------
 app.post('/api/quotes', async (req, res, next) => {
   try {
-
+    const {text, author} = req.body
+    const newQuote = await Quote.create({text, author})
+    res.status(201).json(newQuote)
   } catch (error) {
     next(error)
   }
@@ -91,7 +97,13 @@ app.post('/api/quotes', async (req, res, next) => {
 // ------------------------------------------------------------
 app.delete('/api/quotes/:id', async (req, res, next) => {
   try {
-
+const id = Number(req.params.id)
+const quote = await Quote.findByPk(id)
+if(!quote){
+  return res.sendStatus(404)
+}
+quote.destroy()
+res.sendStatus(204)
   } catch (error) {
     next(error)
   }
@@ -127,7 +139,8 @@ app.use((error, req, res, next) => {
 // ============================================================
 async function startApp() {
   // connect to your db here before the express server listens
-
+ console.log("HELLOOO")
+  await dbConnection.sync()
 
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 }

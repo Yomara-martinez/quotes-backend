@@ -1,6 +1,7 @@
 // ============================================================
 // db/index.js — Sequelize connection
-//
+
+const { Sequelize }= require("sequelize")
 // Before you start:
 //   Run this in quotes-backend: npm install sequelize pg pg-hstore
 //   Then create a "quotes" database in Postico or pgAdmin.
@@ -14,3 +15,5 @@
 // Every other file that needs the database imports from here.
 // Never create a second Sequelize connection in another file.
 // ============================================================
+const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quotes")
+module.exports= dbConnection

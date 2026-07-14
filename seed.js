@@ -3,7 +3,7 @@
 //
 // Requires db/index.js and models/Quote.js to be complete first.
 
-const db = require('./db')
+const dbConnection = require('./db')
 const Quote = require('./models/Quote')
 
 const quotes = [
