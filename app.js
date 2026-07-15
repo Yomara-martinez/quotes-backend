@@ -14,7 +14,7 @@
 
 const express = require('express')
 const morgan = require('morgan')
-const cors = require('cors')
+const cors = require('https://quotes-frontend-ecru.vercel.app/')
 require("dotenv").config()
 
 // ------------------------------------------------------------
