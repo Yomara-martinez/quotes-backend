@@ -15,6 +15,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+require("dotenv").config()
 
 // ------------------------------------------------------------
 // STEP 1 — Import your database connection and Quote model
@@ -35,7 +36,7 @@ dbConnection.authenticate()
 
 
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080
 
 app.use(express.json())  // lets the server read JSON from req.body
 app.use(morgan('dev'))   // logs every incoming request
